@@ -40,10 +40,6 @@ squareElements.forEach(square => {
     })
 })
 
-function moveMole() {
-    setInterval(callMole, 1000)
-}
-
 function countdown() {
     currentTime--
     timeLeft.textContent = currentTime
