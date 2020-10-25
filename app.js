@@ -1,5 +1,5 @@
-const squares = document.querySelectorAll('.square')
-const moles = document.querySelectorAll('.mole')
+const gridSize = 16
+const squareElements = setupGrid()
 const timeLeft = document.querySelector('#time-left')
 
 let score = document.querySelector('#score')
@@ -8,17 +8,30 @@ let currentTime = timeLeft.textContent
 let timerId = setInterval(countdown, 1000)
 let moveMoleId = setInterval(callMole, 1000)
 
+function setupGrid() {
+    let gridElement = document.querySelector('#grid')
+    let squares = []
+    for (let i = 0; i < gridSize; i++) {
+        let squareElement = document.createElement('div')
+        squareElement.classList.add('col-3', 'border', 'square')
+        squareElement.id = i + 1
+        gridElement.appendChild(squareElement)
+        squares.push(squareElement)
+    }
+    return squares
+}
+
 function callMole() {
-    squares.forEach(className => {
-        className.classList.remove('mole')
+    squareElements.forEach(element => {
+        element.classList.remove('mole')
     })
-    let randomPosition = squares[Math.floor(Math.random() * 9)]
+    let randomPosition = squareElements[Math.floor(Math.random() * gridSize)]
     randomPosition.classList.add('mole')
 
     hitPosition = randomPosition.id
 }
 
-squares.forEach(square => {
+squareElements.forEach(square => {
     square.addEventListener('mouseup', () => {
         if (square.id === hitPosition) {
             result = result + 1

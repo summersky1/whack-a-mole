@@ -1,20 +1,14 @@
+#grid {
+  background-color: LightGreen;
+}
+
 .square {
-  width: 200px;
-  height: 200px;
-  border-style: solid;
-  border-color: black;
+  height: 145px;
 }
-  
-.grid {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-content: center;
-  width: 618px;
-  height: 618px;
-}
-  
+
 .mole {
   background-image: url('mole.png');
-  background-size: cover;
+  background-size: 95%;
+  background-repeat: no-repeat;
+  background-position: center; 
 }
