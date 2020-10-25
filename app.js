@@ -1,12 +1,14 @@
 const gridSize = 16
 const squareElements = setupGrid()
 const timeLeft = document.querySelector('#time-left')
+const scoreElement = document.querySelector('#score')
 
-let score = document.querySelector('#score')
-let result = 0
+let score = 0
 let currentTime = timeLeft.textContent
-let timerId = setInterval(countdown, 1000)
-let moveMoleId = setInterval(callMole, 1000)
+let hitPosition = -1
+
+let countdownJob = setInterval(countdown, 1000)
+let callMoleJob = setInterval(callMole, 1000)
 
 function setupGrid() {
     let gridElement = document.querySelector('#grid')
@@ -14,7 +16,7 @@ function setupGrid() {
     for (let i = 0; i < gridSize; i++) {
         let squareElement = document.createElement('div')
         squareElement.classList.add('col-3', 'border', 'square')
-        squareElement.id = i + 1
+        squareElement.id = i
         gridElement.appendChild(squareElement)
         squares.push(squareElement)
     }
@@ -25,17 +27,17 @@ function callMole() {
     squareElements.forEach(element => {
         element.classList.remove('mole')
     })
-    let randomPosition = squareElements[Math.floor(Math.random() * gridSize)]
-    randomPosition.classList.add('mole')
+    let randomSquare = squareElements[Math.floor(Math.random() * gridSize)]
+    randomSquare.classList.add('mole')
 
-    hitPosition = randomPosition.id
+    hitPosition = randomSquare.id
 }
 
 squareElements.forEach(square => {
     square.addEventListener('mouseup', () => {
         if (square.id === hitPosition) {
-            result = result + 1
-            score.textContent = result
+            score++
+            scoreElement.textContent = score
         }
     })
 })
@@ -44,8 +46,8 @@ function countdown() {
     currentTime--
     timeLeft.textContent = currentTime
     if (currentTime === 0) {
-        clearInterval(timerId)
-        clearInterval(moveMoleId)
-        alert('GAME OVER! Your final score is: ' + result)
+        clearInterval(countdownJob)
+        clearInterval(callMoleJob)
+        alert('Game over! Your final score is: ' + score)
     }
 }
