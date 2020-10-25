@@ -11,4 +11,20 @@ function callMole() {
     })
     let randomPosition = squares[Math.floor(Math.random() * 9)]
     randomPosition.classList.add('mole')
+
+    hitPosition = randomPosition.id
+}
+
+squares.forEach(square => {
+    square.addEventListener('mouseup', () => {
+        if (square.id === hitPosition) {
+            result = result + 1
+            score.textContent = result
+        }
+    })
+})
+
+function moveMole() {
+    let timerId = null
+    timerId = setInterval(callMole, 1000)
 }
