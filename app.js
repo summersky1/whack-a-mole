@@ -4,6 +4,8 @@ const timeLeft = document.querySelector('#time-left')
 
 let score = document.querySelector('#score')
 let result = 0
+let currentTime = timeLeft.textContent
+let timerId = setInterval(countdown, 1000)
 
 function callMole() {
     squares.forEach(className => {
@@ -25,6 +27,16 @@ squares.forEach(square => {
 })
 
 function moveMole() {
-    let timerId = null
-    timerId = setInterval(callMole, 1000)
+    setInterval(callMole, 1000)
 }
+
+function countdown() {
+    currentTime--
+    timeLeft.textContent = currentTime
+    if (currentTime === 0) {
+        clearInterval(timerId)
+        alert('GAME OVER! Your final score is: ' + result)
+    }
+}
+
+moveMole()
