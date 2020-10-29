@@ -5,7 +5,7 @@ const scoreElement = document.querySelector('#score')
 
 let score = 0
 let currentTime = timeLeft.textContent
-let hitPosition = -1
+let hitPosition = 0
 
 let countdownJob = setInterval(countdown, 1000)
 let callMoleJob = setInterval(callMole, 1000)
@@ -24,12 +24,10 @@ function setupGrid() {
 }
 
 function callMole() {
-    squareElements.forEach(element => {
-        element.classList.remove('mole')
-    })
+    // remove mole from last square
+    squareElements[hitPosition].classList.remove('mole')
     let randomSquare = squareElements[Math.floor(Math.random() * gridSize)]
     randomSquare.classList.add('mole')
-
     hitPosition = randomSquare.id
 }
 
