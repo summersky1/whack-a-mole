@@ -3,6 +3,8 @@ const squareElements = setupGrid()
 const timeLeft = document.querySelector('#time-left')
 const scoreElement = document.querySelector('#score')
 
+const animationClasses = ['animated', 'fadeIn', 'fast']
+
 let score = 0
 let currentTime = timeLeft.textContent
 let hitPosition = 0
@@ -28,6 +30,7 @@ function callMole() {
     squareElements[hitPosition].classList.remove('mole')
     let randomSquare = squareElements[Math.floor(Math.random() * gridSize)]
     randomSquare.classList.add('mole')
+    animateMole(randomSquare)
     hitPosition = randomSquare.id
 }
 
@@ -39,6 +42,12 @@ squareElements.forEach(square => {
         }
     })
 })
+
+function animateMole(mole) {
+    mole.classList.remove(...animationClasses)
+    mole.offsetWidth // necessary to replay animation
+    mole.classList.add(...animationClasses)
+}
 
 function countdown() {
     currentTime--
