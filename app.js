@@ -19,6 +19,7 @@ function setupGrid() {
         let squareElement = document.createElement('div')
         squareElement.classList.add('col-3', 'border', 'square')
         squareElement.id = i
+        squareElement.addEventListener('mouseup', detectHit)
         gridElement.appendChild(squareElement)
         squares.push(squareElement)
     }
@@ -34,14 +35,12 @@ function callMole() {
     hitPosition = randomSquare.id
 }
 
-squareElements.forEach(square => {
-    square.addEventListener('mouseup', () => {
-        if (square.id === hitPosition) {
-            score++
-            scoreElement.textContent = score
-        }
-    })
-})
+function detectHit() {
+    if (this.id === hitPosition) {
+        score++
+        scoreElement.textContent = score
+    }
+}
 
 function animateMole(mole) {
     mole.classList.remove(...animationClasses)
