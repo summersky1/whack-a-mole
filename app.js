@@ -55,6 +55,7 @@ function countdown() {
     timeLeft.textContent = currentTime
     if (currentTime === 0) {
         clearInterval(countdownJob)
+        hitPosition = -1 // disable hit detection
         alert('Game over! Your final score is: ' + score)
     }
 }
