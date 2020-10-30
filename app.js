@@ -10,7 +10,6 @@ let currentTime = timeLeft.textContent
 let hitPosition = 0
 
 let countdownJob = setInterval(countdown, 1000)
-let callMoleJob = setInterval(callMole, 1000)
 
 function setupGrid() {
     let gridElement = document.querySelector('#grid')
@@ -33,6 +32,9 @@ function callMole() {
     randomSquare.classList.add('mole')
     animateMole(randomSquare)
     hitPosition = randomSquare.id
+    if (currentTime > 1) {
+        setTimeout(callMole, Math.floor(Math.random() * 1000) + 500)
+    }
 }
 
 function detectHit() {
@@ -53,7 +55,8 @@ function countdown() {
     timeLeft.textContent = currentTime
     if (currentTime === 0) {
         clearInterval(countdownJob)
-        clearInterval(callMoleJob)
         alert('Game over! Your final score is: ' + score)
     }
 }
+
+callMole()
