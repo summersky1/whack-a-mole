@@ -30,8 +30,11 @@ function callMole() {
     squareElements[hitPosition].classList.remove('mole')
     let randomSquare = squareElements[Math.floor(Math.random() * gridSize)]
     randomSquare.classList.add('mole')
-    animateMole(randomSquare)
-    hitPosition = randomSquare.id
+    // don't animate if mole appears in same position
+    if (hitPosition !== randomSquare.id) {
+        animateMole(randomSquare)
+        hitPosition = randomSquare.id
+    }
     if (currentTime > 1) {
         setTimeout(callMole, Math.floor(Math.random() * 1000) + 500)
     }
