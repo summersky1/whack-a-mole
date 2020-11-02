@@ -69,6 +69,7 @@ function countdown() {
     if (currentTime === 0) {
         clearInterval(countdownJob)
         hitPosition = -1 // disable hit detection
+        moleElement.style.cursor = 'auto'
         alert('Game over! Your final score is: ' + score)
     }
 }
