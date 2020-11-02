@@ -29,6 +29,7 @@ function createMoleImageElement() {
     let mole = document.createElement('img')
     mole.setAttribute('src', 'mole.png')
     mole.classList.add('img-fluid')
+    mole.style.cursor = 'pointer'
     return mole
 }
 
