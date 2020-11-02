@@ -5,10 +5,3 @@
 .square {
   height: 145px;
 }
-
-.mole {
-  background-image: url('mole.png');
-  background-size: 95%;
-  background-repeat: no-repeat;
-  background-position: center; 
-}

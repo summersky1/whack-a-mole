@@ -1,8 +1,8 @@
 const gridSize = 16
 const squareElements = setupGrid()
+const moleElement = createMoleImageElement()
 const timeLeft = document.querySelector('#time-left')
 const scoreElement = document.querySelector('#score')
-
 const animationClasses = ['animated', 'fadeIn', 'fast']
 
 let score = 0
@@ -16,7 +16,7 @@ function setupGrid() {
     let squares = []
     for (let i = 0; i < gridSize; i++) {
         let squareElement = document.createElement('div')
-        squareElement.classList.add('col-3', 'border', 'square')
+        squareElement.classList.add('col-3', 'border', 'square', 'p-1')
         squareElement.id = i
         squareElement.addEventListener('mouseup', detectHit)
         gridElement.appendChild(squareElement)
@@ -25,14 +25,23 @@ function setupGrid() {
     return squares
 }
 
+function createMoleImageElement() {
+    let mole = document.createElement('img')
+    mole.setAttribute('src', 'mole.png')
+    mole.classList.add('img-fluid')
+    return mole
+}
+
 function callMole() {
     // remove mole from last square
-    squareElements[hitPosition].classList.remove('mole')
+    if (squareElements[hitPosition].contains(moleElement)) {
+        squareElements[hitPosition].removeChild(moleElement)
+    }
     let randomSquare = squareElements[Math.floor(Math.random() * gridSize)]
-    randomSquare.classList.add('mole')
+    randomSquare.appendChild(moleElement)
     // don't animate if mole appears in same position
     if (hitPosition !== randomSquare.id) {
-        animateMole(randomSquare)
+        animateMole(moleElement)
         hitPosition = randomSquare.id
     }
     if (currentTime > 1) {
