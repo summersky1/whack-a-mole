@@ -3,7 +3,8 @@ const squareElements = setupGrid()
 const moleElement = createMoleImageElement()
 const timeLeft = document.querySelector('#time-left')
 const scoreElement = document.querySelector('#score')
-const animationClasses = ['animated', 'fadeIn', 'fast']
+const moleAppearAnimation = ['animated', 'fadeIn', 'fast']
+const moleHitAnimation = ['animated', 'rubberBand', 'fast']
 
 let score = 0
 let currentTime = timeLeft.textContent
@@ -42,7 +43,7 @@ function callMole() {
     randomSquare.appendChild(moleElement)
     // don't animate if mole appears in same position
     if (hitPosition !== randomSquare.id) {
-        animateMole(moleElement)
+        animateMoleAppears(moleElement)
         hitPosition = randomSquare.id
     }
     if (currentTime > 1) {
@@ -54,13 +55,18 @@ function detectHit() {
     if (this.id === hitPosition) {
         score++
         scoreElement.textContent = score
+        animateMoleHit(this)
     }
 }
 
-function animateMole(mole) {
-    mole.classList.remove(...animationClasses)
-    mole.offsetWidth // necessary to replay animation
-    mole.classList.add(...animationClasses)
+function animateMoleAppears(mole) {
+    mole.classList.add(...moleAppearAnimation)
+    setTimeout(() => mole.classList.remove(...moleAppearAnimation), 500)
+}
+
+function animateMoleHit(mole) {
+    mole.classList.add(...moleHitAnimation)
+    setTimeout(() => mole.classList.remove(...moleHitAnimation), 500)
 }
 
 function countdown() {
