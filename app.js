@@ -43,7 +43,7 @@ function callMole() {
     randomSquare.appendChild(moleElement)
     // don't animate if mole appears in same position
     if (hitPosition !== randomSquare.id) {
-        animateMoleAppears(moleElement)
+        animate(moleElement, moleAppearAnimation)
         hitPosition = randomSquare.id
     }
     if (currentTime > 1) {
@@ -55,18 +55,13 @@ function detectHit() {
     if (this.id === hitPosition) {
         score++
         scoreElement.textContent = score
-        animateMoleHit(this)
+        animate(this, moleHitAnimation)
     }
 }
 
-function animateMoleAppears(mole) {
-    mole.classList.add(...moleAppearAnimation)
-    setTimeout(() => mole.classList.remove(...moleAppearAnimation), 500)
-}
-
-function animateMoleHit(mole) {
-    mole.classList.add(...moleHitAnimation)
-    setTimeout(() => mole.classList.remove(...moleHitAnimation), 500)
+function animate(element, animationClasses) {
+    element.classList.add(...animationClasses)
+    setTimeout(() => element.classList.remove(...animationClasses), 500)
 }
 
 function countdown() {
